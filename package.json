@@ -4,7 +4,8 @@
   "main": "config.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -17,5 +18,14 @@
     "url": "https://github.com/Dominion116/ecommerce-backend/issues"
   },
   "homepage": "https://github.com/Dominion116/ecommerce-backend#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
 }
