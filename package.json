@@ -1,0 +1,21 @@
+{
+  "name": "ecommerce-backend",
+  "version": "1.0.0",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dominion116/ecommerce-backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dominion116/ecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/Dominion116/ecommerce-backend#readme",
+  "description": ""
+}
