@@ -19,7 +19,6 @@
     "url": "https://github.com/Dominion116/ecommerce-backend/issues"
   },
   "homepage": "https://github.com/Dominion116/ecommerce-backend#readme",
-  "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.6",
@@ -38,5 +37,6 @@
   },
   "devDependencies": {
     "nodemon": "^3.1.0"
-  }
+  },
+  "description": ""
 }
