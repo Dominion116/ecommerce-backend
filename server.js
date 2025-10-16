@@ -13,7 +13,7 @@ const orderRouter = require('./routers/orderRouter.js');
 const productRouter = require('./routers/productRouter.js');
 const uploadRouter = require('./routers/uploadRouter.js');
 
-const __dirname = path.resolve();
+// const __dirname = path.resolve();
 
 mongoose
   .connect(config.MONGODB_URL)
