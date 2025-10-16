@@ -22,6 +22,30 @@ userRouter.get(
     }
   })
 );
+
+/**
+ * @swagger
+ * /api/users/signin:
+ *   post:
+ *     summary: Sign in a user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User signed in successfully
+ *       401:
+ *         description: Invalid Email or Password
+ */
 userRouter.post(
   '/signin',
   expressAsyncHandler(async (req, res) => {
@@ -44,6 +68,7 @@ userRouter.post(
     }
   })
 );
+
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {

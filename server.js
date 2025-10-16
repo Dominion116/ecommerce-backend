@@ -7,6 +7,8 @@ const morgan = require('morgan');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const rateLimit = require('express-rate-limit');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 const config = require('./config.js');
 const userRouter = require('./routers/userRouter.js');
 const orderRouter = require('./routers/orderRouter.js');
@@ -21,6 +23,35 @@ mongoose
   .catch((error) => console.log(error));
 
 const app = express();
+
+// Swagger definition
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Ecommerce API',
+    version: '1.0.0',
+    description: 'API documentation for the Ecommerce application.',
+  },
+  servers: [
+    {
+      url: `http://localhost:5000`,
+      description: 'Development server',
+    },
+  ],
+};
+
+// Options for the swagger-jsdoc
+const options = {
+  swaggerDefinition,
+  // Path to the API docs
+  apis: ['./routers/*.js'],
+};
+
+// Initialize swagger-jsdoc
+const swaggerSpec = swaggerJSDoc(options);
+
+// Serve swagger-ui
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 // Security Middleware
 app.use(helmet());
