@@ -1,6 +1,6 @@
-import express from 'express';
-import multer from 'multer';
-import { isAuth, isAdmin } from '../utils';
+const express = require('express');
+const multer = require('multer');
+const { isAuth, isAdmin } = require('../utils.js');
 
 const storage = multer.diskStorage({
   destination(req, file, cb) {
@@ -17,4 +17,4 @@ const uploadRouter = express.Router();
 uploadRouter.post('/', isAuth, isAdmin, upload.single('image'), (req, res) => {
   res.status(201).send({ image: `/${req.file.path}` });
 });
-export default uploadRouter;
+module.exports = uploadRouter;
