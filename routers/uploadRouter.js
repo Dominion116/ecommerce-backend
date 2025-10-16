@@ -14,6 +14,34 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 const uploadRouter = express.Router();
 
+/**
+ * @swagger
+ * /api/uploads:
+ *   post:
+ *     summary: Upload an image
+ *     tags: [Uploads]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               image:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Image uploaded successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 image:
+ *                   type: string
+ */
 uploadRouter.post('/', isAuth, isAdmin, upload.single('image'), (req, res) => {
   res.status(201).send({ image: `/${req.file.path}` });
 });

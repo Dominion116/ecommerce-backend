@@ -4,6 +4,23 @@ const { isAuth, isAdmin } = require('../utils.js');
 const Product = require('../models/productModel.js');
 
 const productRouter = express.Router();
+
+/**
+ * @swagger
+ * /api/products:
+ *   get:
+ *     summary: Get all products
+ *     tags: [Products]
+ *     parameters:
+ *       - in: query
+ *         name: searchKeyword
+ *         schema:
+ *           type: string
+ *         description: The search keyword to filter products by name
+ *     responses:
+ *       200:
+ *         description: A list of products
+ */
 productRouter.get(
   '/',
   expressAsyncHandler(async (req, res) => {
@@ -19,6 +36,24 @@ productRouter.get(
     res.send(products);
   })
 );
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   get:
+ *     summary: Get a product by ID
+ *     tags: [Products]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The product ID
+ *     responses:
+ *       200:
+ *         description: The product with the specified ID
+ */
 productRouter.get(
   '/:id',
   expressAsyncHandler(async (req, res) => {
@@ -27,6 +62,20 @@ productRouter.get(
   })
 );
 
+/**
+ * @swagger
+ * /api/products:
+ *   post:
+ *     summary: Create a new product
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Product created successfully
+ *       500:
+ *         description: Error creating product
+ */
 productRouter.post(
   '/',
   isAuth,
@@ -49,6 +98,51 @@ productRouter.post(
     }
   })
 );
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   put:
+ *     summary: Update a product
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The product ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               image:
+ *                 type: string
+ *               brand:
+ *                 type: string
+ *               category:
+ *                 type: string
+ *               countInStock:
+ *                 type: number
+ *               description:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Product updated successfully
+ *       404:
+ *         description: Product Not Found
+ *       500:
+ *         description: Error updating product
+ */
 productRouter.put(
   '/:id',
   isAuth,
@@ -75,6 +169,28 @@ productRouter.put(
     }
   })
 );
+
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   delete:
+ *     summary: Delete a product
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The product ID
+ *     responses:
+ *       200:
+ *         description: Product deleted successfully
+ *       404:
+ *         description: Product Not Found
+ */
 productRouter.delete(
   '/:id',
   isAuth,
@@ -90,6 +206,38 @@ productRouter.delete(
   })
 );
 
+/**
+ * @swagger
+ * /api/products/{id}/reviews:
+ *   post:
+ *     summary: Create a new review for a product
+ *     tags: [Products]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The product ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               rating:
+ *                 type: number
+ *               comment:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Review created successfully
+ *       404:
+ *         description: Product not found
+ */
 productRouter.post(
   '/:id/reviews',
   isAuth,

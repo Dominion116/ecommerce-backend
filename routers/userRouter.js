@@ -5,6 +5,18 @@ const { generateToken, isAuth } = require('../utils.js');
 
 const userRouter = express.Router();
 
+/**
+ * @swagger
+ * /api/users/createadmin:
+ *   get:
+ *     summary: Create an admin user
+ *     tags: [Users]
+ *     responses:
+ *       200:
+ *         description: Admin user created successfully
+ *       500:
+ *         description: Error creating admin user
+ */
 userRouter.get(
   '/createadmin',
   expressAsyncHandler(async (req, res) => {
@@ -69,6 +81,31 @@ userRouter.post(
   })
 );
 
+/**
+ * @swagger
+ * /api/users/register:
+ *   post:
+ *     summary: Register a new user
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User registered successfully
+ *       401:
+ *         description: Invalid User Data
+ */
 userRouter.post(
   '/register',
   expressAsyncHandler(async (req, res) => {
@@ -93,6 +130,41 @@ userRouter.post(
     }
   })
 );
+
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   put:
+ *     summary: Update a user's profile
+ *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The user ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *       404:
+ *         description: User Not Found
+ */
 userRouter.put(
   '/:id',
   isAuth,
